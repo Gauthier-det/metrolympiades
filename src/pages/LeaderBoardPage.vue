@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
-import "../assets/style.css";
+import "../assets/main.css";
 
 const router = useRouter();
 const user = JSON.parse(localStorage.getItem("user")); 
