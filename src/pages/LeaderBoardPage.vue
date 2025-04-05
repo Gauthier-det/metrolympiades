@@ -36,31 +36,29 @@ onMounted(() => {
 
 <template>
   <div class="container">
-
     <Sidebar :user="user" />
-
     <div class="main-content">
       <h1>Classement Général</h1>
-
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Équipe</th>
-            <th>Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(team, index) in teams" :key="team.id">
-            <td>{{ index + 1 }}</td>
-            <td>{{ team.team }}</td>
-            <td>{{ team.points }} pts</td>
-          </tr>
-        </tbody>
-      </table>
-
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Équipe</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(team, index) in teams" :key="team.id">
+              <td>{{ index + 1 }}</td>
+              <td>{{ team.team }}</td>
+              <td>{{ team.points }} pts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
