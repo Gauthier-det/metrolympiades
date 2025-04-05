@@ -6,6 +6,10 @@ import LoginPage from "./pages/LoginPage.vue";
 const routes = [
     {
         path: "/",
+        redirect: "/leaderboard"
+    },
+    {
+        path: "/register",
         name: "register",
         component: RegisterPage
     },

@@ -80,7 +80,7 @@ function login() {
 
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
-    <p>Pas encore de compte ? <router-link to="/">Je m'inscris</router-link></p>
+    <p>Pas encore de compte ? <router-link to="/register">Je m'inscris</router-link></p>
 
   </form>
 </template>
