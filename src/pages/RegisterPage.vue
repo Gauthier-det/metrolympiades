@@ -62,7 +62,8 @@ function register() {
 </script>
 
 <template>
-  <form @submit.prevent="register" class="form-container">
+  <div class="page-container">
+    <form @submit.prevent="register" class="form-container">
     <h1 style="margin-bottom: 1rem">Inscription</h1>
     <input
       type="text"
@@ -107,4 +108,5 @@ function register() {
     <p>Déjà inscrit ? <router-link to="/login">Me connecter</router-link></p>
 
   </form>
+  </div>
 </template>

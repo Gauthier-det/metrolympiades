@@ -55,7 +55,8 @@ function login() {
 </script>
 
 <template>
-  <form @submit.prevent="login" class="form-container">
+  <div class="page-container">
+    <form @submit.prevent="login" class="form-container">
     <h1 style="margin-bottom: 1rem">Connexion</h1>
     <input
       type="email"
@@ -83,4 +84,5 @@ function login() {
     <p>Pas encore de compte ? <router-link to="/register">Je m'inscris</router-link></p>
 
   </form>
+  </div>
 </template>
