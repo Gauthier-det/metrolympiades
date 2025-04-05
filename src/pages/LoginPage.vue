@@ -55,7 +55,7 @@ function login() {
 </script>
 
 <template>
-  <form @submit.prevent="login">
+  <form @submit.prevent="login" class="form-container">
     <h1 style="margin-bottom: 1rem">Connexion</h1>
     <input
       type="email"

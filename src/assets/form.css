@@ -1,34 +1,35 @@
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  input, button {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button:disabled {
-    background-color: #ddd;
-  }
-  
-  button.loading {
-    background-color: #0d6efd;
-    color: white;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 1rem;
-    margin-top: 1rem;
-  }
-  
+/* form.css */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-container input,
+.form-container button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container button:disabled {
+  background-color: #ddd;
+}
+
+.form-container button.loading {
+  background-color: #0d6efd; 
+  color: white;
+}
+
+.form-container .error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 1rem;
+}

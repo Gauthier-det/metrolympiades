@@ -62,7 +62,7 @@ function register() {
 </script>
 
 <template>
-  <form @submit.prevent="register">
+  <form @submit.prevent="register" class="form-container">
     <h1 style="margin-bottom: 1rem">Inscription</h1>
     <input
       type="text"
