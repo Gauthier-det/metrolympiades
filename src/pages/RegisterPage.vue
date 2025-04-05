@@ -104,6 +104,7 @@ function register() {
 
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     
-    <router-link to="/login">Je possède déjà un compte</router-link>
+    <p>Déjà inscrit ? <router-link to="/login">Me connecter</router-link></p>
+
   </form>
 </template>
