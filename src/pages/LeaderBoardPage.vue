@@ -1,10 +1,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import Sidebar from "../components/Sidebar.vue";
 
 import "../assets/main.css";
 
-const router = useRouter();
 const user = JSON.parse(localStorage.getItem("user")); 
 const teams = ref([]); 
 const errorMessage = ref("");
@@ -37,34 +36,13 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <div class="sidebar">
-      <div class="app-name">Metrolympiades</div>
 
-      <div v-if="user">
-        <div class="team-name">Équipe : {{ user.team.name }}</div>
-        <router-link to="/leaderboard">
-            <i class="fa-solid fa-ranking-star"></i> Classement général
-        </router-link>
-        <router-link to="#">
-            <i class="fas fa-users"></i> Mon équipe
-        </router-link>
-        <router-link to="#">
-            <i class="fas fa-calendar-alt"></i> Mes matchs
-        </router-link>
-        <button @click="logout">
-            <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
-        </button>
-      </div>
-
-      <div v-else>
-        <router-link to="/login">
-            <i class="fa-solid fa-right-to-bracket"></i> Se connecter
-        </router-link>
-      </div>
-    </div>
+    <Sidebar :user="user" />
 
     <div class="main-content">
       <h1>Classement Général</h1>
+
+      <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
       <table>
         <thead>
@@ -82,6 +60,7 @@ onMounted(() => {
           </tr>
         </tbody>
       </table>
+
     </div>
   </div>
 </template>
