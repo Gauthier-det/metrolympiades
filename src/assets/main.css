@@ -15,6 +15,7 @@ body {
 .container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -24,6 +25,8 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  height: 100vh;
 }
 
 .app-name {
@@ -89,6 +92,8 @@ body {
 .main-content {
   flex-grow: 1;
   padding: 2rem;
+  margin-left: 250px;
+  overflow: auto;
 }
 
 .main-content h1 {
@@ -97,8 +102,6 @@ body {
 }
 
 .table-container {
-  height: calc(100vh - 150px);
-  overflow-y: auto;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -106,14 +109,10 @@ body {
 table {
   width: 100%;
   border-collapse: separate;
-  /*border-spacing: 0;*/
 }
 
 thead {
-  position: sticky;
-  top: 0;
   background-color: #f4f4f4;
-  z-index: 1;
 }
 
 thead th {
@@ -137,4 +136,79 @@ table tr:nth-child(even) {
 
 table tr:hover {
   background-color: #f1f1f1;
+}
+
+.error {
+  color: red;
+}
+
+/* style pour le page games*/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.add-match-button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-match-button:hover {
+  background-color: #0056b3;
+}
+
+.matches-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.match-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.match-type {
+  font-weight: bold;
+}
+
+.match-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.team {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-name {
+  font-weight: bold;
+}
+
+.team-score {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
