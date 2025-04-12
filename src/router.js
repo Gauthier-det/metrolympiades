@@ -28,18 +28,37 @@ const routes = [
     {
         path: "/games",
         name: "games",
-        component: GamesPage
+        component: GamesPage,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: "/team",
         name: "team",
-        component: Team
+        component: Team,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.beforeEach((to, _, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            next({ name: 'login' });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
 });
 
 export default router;

@@ -14,7 +14,9 @@ const router = useRouter();
 
 function logout() {
   localStorage.removeItem("user");
-  router.push("/login");
+  router.push("/").then(() => {
+    router.go(0);
+  });
 }
 </script>
 
