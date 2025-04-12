@@ -1,6 +1,8 @@
 <script setup>
 import { useRouter } from "vue-router";
 
+import "../assets/sidebar.css";
+
 const props = defineProps({
   user: {
     type: Object,

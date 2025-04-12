@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import Sidebar from "../components/Sidebar.vue";
 
-import "../assets/main.css";
+import "../assets/leaderboard.css";
 
 const user = JSON.parse(localStorage.getItem("user")); 
 const teams = ref([]); 
