@@ -1,0 +1,127 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import Sidebar from "../components/Sidebar.vue";
+
+
+import "../assets/main.css";
+import "../assets/teamForm.css";
+
+const router = useRouter();
+
+const user = JSON.parse(localStorage.getItem("user")); 
+
+
+const teammates = ref([]);
+const teams = ref([]);
+const errorMessage = ref("");
+const teamName = ref("");
+const updateMessage = ref("");
+
+async function fetchTeam() {
+  try {
+    const response = await fetch("http://localhost:3000/teams/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Impossible de récupérer le classement");
+    }
+    const data = await response.json();
+    teams.value = data;
+    teamName.value = teams.value.name;
+    console.log(teams.value);
+    showTeammates();
+    console.log(teams.value);
+  } catch (error) {
+    errorMessage.value = "Erreur lors de la récupération du classement.";
+    console.error(error);
+  }
+}
+
+function showTeammates(){
+    teams.value.members.forEach(teammate => {
+        teammates.value.push(teammate);
+    });
+}
+
+function updateTeam(){
+    if (teamName.value.trim() === "") {
+        errorMessage.value = "Le nom de l'équipe ne peut pas être vide.";
+        return;
+    }
+    const members = teammates.value.filter(teammate => teammate.trim() !== "");
+
+    const updatedTeam = {
+        name: teamName.value,
+        members: members 
+    };
+
+    fetch("http://localhost:3000/teams/me", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(updatedTeam),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Équipe mise à jour :", data);
+        updateMessage.value = "Équipe mise à jour avec succès !";
+        errorMessage.value = ""; 
+    })
+    .catch(error => {
+        console.error("Erreur lors de la mise à jour de l'équipe :", error);
+    });
+}
+
+
+function addTeammate() {
+    teammates.value.push("");
+    updateMessage.value = "";
+}
+
+onMounted(() => {
+  fetchTeam();
+});
+
+function removeTeammate(index) {
+    teammates.value.splice(index, 1);
+    updateTeam(); 
+}
+</script>
+
+<template>
+    <div class="container">
+        <Sidebar :user="user" />
+        <div class="main-content">
+            <h1>Mon équipe !</h1>
+            <form id="team-form">
+                <label class="label" for="teamname">Nom de l'équipe :</label>
+                <br><br>
+                <input type="text" id="teamname" name="teamname" placeholder="Nom d'équipe" v-model="teamName" />
+                <label v-if="errorMessage" class="error-message">{{ errorMessage }}</label>
+                <br><br>
+                <label class="label" for="teammember">Membres de l'équipe :</label>
+                <div id="teammates-list">
+                    <div v-for="(teammate, index) in teammates" :key="index">
+                        <input type="text" v-model="teammates[index]" placeholder="Nom du coéquipier" />
+                        <button type="button" @click="removeTeammate(index)" class="remove-btn">Supprimer</button>
+                    </div>
+                </div>
+                <input type="button" value="Ajouter un coéquipier" @click="addTeammate" />
+                <br><br>
+                <div class="header-actions">
+                    <input type="button" value="Enregistrer" @click="updateTeam" />
+                </div>
+                <label v-if="updateMessage" class="success-message">{{ updateMessage }}</label>
+            </form>
+        </div>
+    
+    </div>
+</template>
+
