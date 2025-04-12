@@ -27,7 +27,7 @@ function logout() {
       <router-link to="/leaderboard">
           <i class="fa-solid fa-ranking-star"></i> Classement général
       </router-link>
-      <router-link to="#">
+      <router-link to="/team">
           <i class="fas fa-users"></i> Mon équipe
       </router-link>
       <router-link to="/games">

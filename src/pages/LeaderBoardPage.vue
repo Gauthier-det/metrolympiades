@@ -16,10 +16,10 @@ async function fetchRanking() {
     }
     const data = await response.json();
     teams.value = data;
-    console.log(JSON.stringify(teams.value));
+    //console.log(JSON.stringify(teams.value));
   } catch (error) {
     errorMessage.value = "Erreur lors de la récupération du classement.";
-    console.error(error);
+    //console.error(error);
   }
 }
 

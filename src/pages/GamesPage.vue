@@ -23,10 +23,10 @@ async function fetchMatchs() {
     }
     const data = await response.json();
     matchs.value = data;
-    console.log("matchs : " + JSON.stringify(matchs.value));
+    //console.log("matchs : " + JSON.stringify(matchs.value));
   } catch (error) {
     errorMessage.value = "Erreur lors de la récupération des matchs ";
-    console.error(error.message);
+    //console.error(error.message);
   }
 }
 
