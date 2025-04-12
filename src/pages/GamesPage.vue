@@ -46,7 +46,12 @@ onMounted(() => {
     <Sidebar :user="user"/>
 
     <div class="main-content">
-        <h1>Mes matchs</h1>
+        <div class="header">
+          <h1>Mes matchs</h1>
+          <button >
+            <router-link to="/game">Nouveau Match</router-link>
+          </button>
+        </div>
         <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
         <div class="matches-container">

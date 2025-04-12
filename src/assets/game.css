@@ -1,0 +1,77 @@
+.error {
+    color: red;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.game-main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    width: 100%;
+    font-size: 1em;
+    margin: 0;
+}
+
+.game-main-container h2 {
+    font-size: 1.3em;
+    margin: 20px 0 0 20px;
+}
+
+.game-main-container strong {
+    font-weight: bold;
+}
+
+.game-input-container select, input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.game-input-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    align-items: end;
+}
+
+.game-input-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    align-items: end;
+}
+
+.game-input-container > *:first-child {
+    flex: 0.3;
+}
+.game-input-container > *:last-child {
+    flex: 0.7;
+}
+
+.game-button {
+    width: auto;
+    margin: 20px 0 0 0;
+    padding: 10px 20px;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+.game-button:disabled {
+    color: #ffffff;
+    background-color: #cccccc;
+    cursor: not-allowed;
+    border: none;
+}
