@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import Sidebar from "../components/Sidebar.vue";
 
-import "../assets/main.css";
+import "../assets/leaderboard.css";
 
 const user = JSON.parse(localStorage.getItem("user")); 
 const teams = ref([]); 
@@ -16,16 +16,11 @@ async function fetchRanking() {
     }
     const data = await response.json();
     teams.value = data;
-    console.log(teams.value);
+    console.log(JSON.stringify(teams.value));
   } catch (error) {
     errorMessage.value = "Erreur lors de la récupération du classement.";
     console.error(error);
   }
-}
-
-function logout() {
-  localStorage.removeItem("user");
-  router.push("/login");
 }
 
 onMounted(() => {

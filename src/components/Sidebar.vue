@@ -1,6 +1,8 @@
 <script setup>
 import { useRouter } from "vue-router";
 
+import "../assets/sidebar.css";
+
 const props = defineProps({
   user: {
     type: Object,
@@ -28,7 +30,7 @@ function logout() {
       <router-link to="#">
           <i class="fas fa-users"></i> Mon équipe
       </router-link>
-      <router-link to="#">
+      <router-link to="/games">
           <i class="fas fa-calendar-alt"></i> Mes matchs
       </router-link>
       <button @click="logout">
