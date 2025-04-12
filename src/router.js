@@ -3,6 +3,7 @@ import RegisterPage from "./pages/RegisterPage.vue";
 import LeaderBoardPage from "./pages/LeaderBoardPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import GamesPage from "./pages/GamesPage.vue";
+import GamePage from "./pages/GamePage.vue";
 import Team from "./pages/TeamPage.vue";
 
 const routes = [
@@ -29,6 +30,14 @@ const routes = [
         path: "/games",
         name: "games",
         component: GamesPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/game",
+        name: "game",
+        component: GamePage,
         meta: {
             requiresAuth: true
         }
