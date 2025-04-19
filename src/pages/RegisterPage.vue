@@ -23,48 +23,49 @@ const isFormValid = computed(() => {
 
 const isLoading = ref(false);
 
-function register() {
+async function register() {
   isLoading.value = true;
   errorMessage.value = "";
 
-  fetch("http://localhost:3000/auth/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      email: email.value,
-      username: username.value,
-      password: password.value,
-      teamName: teamname.value,
-    }),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        return res.json().then((data) => {
-          if (data.message === "User already exists") {
-            errorMessage.value = "Cet utilisateur existe déjà.";
-          } else {
-            errorMessage.value =
-              "Une erreur s'est produite. Veuillez réessayer.";
-          }
-          throw new Error(data.message);
-        });
-      }
-      return res.json();
-    })
-    .then((data) => {
-      localStorage.setItem("user", JSON.stringify(data));
-      router.push("/leaderboard");
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      isLoading.value = false;
+  try {
+    const response = await fetch("http://localhost:3000/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        username: username.value,
+        password: password.value,
+        teamName: teamname.value,
+      }),
     });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 400) {
+        errorMessage.value = "Cet utilisateur existe déjà.";
+      } else {
+        errorMessage.value =
+          "Une erreur s'est produite. Veuillez réessayer.";
+      }
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify(data));
+    router.push("/leaderboard");
+
+  } catch (error) {
+    console.error("Erreur réseau ou API injoignable :", error);
+    errorMessage.value = "Une erreur est survenue. Veuillez réessayer.";
+  } finally {
+    isLoading.value = false;
+  }
 }
+
+
+
 </script>
 
 <template>

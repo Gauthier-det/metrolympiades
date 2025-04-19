@@ -16,42 +16,45 @@ const isFormValid = computed(() => {
 
 const isLoading = ref(false);
 
-function login() {
+async function login() {
   isLoading.value = true;
+  errorMessage.value = "";
 
-  fetch("http://localhost:3000/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value,
-    }),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        return res.json().then((data) => {
-          if (data.message === "Invalid email or password") {
-            errorMessage.value = "Mot de passe ou email incorrect.";
-          }
-          throw new Error(data.message);
-        });
-      }
-      return res.json();
-    })
-    .then((data) => {
-      localStorage.setItem("user", JSON.stringify(data));
-      router.push("/leaderboard");
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      isLoading.value = false;
+  try {
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
     });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        errorMessage.value = "Email ou mot de passe incorrect.";
+      } else {
+        errorMessage.value = "Une erreur est survenue. Veuillez réessayer.";
+      }
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify(data));
+    router.push("/leaderboard");
+
+  } catch (error) {
+    console.error("Erreur réseau ou serveur injoignable :", error);
+    errorMessage.value = "Une erreur est survenue. Veuillez réessayer.";
+  } finally {
+    isLoading.value = false;
+  }
 }
+
+
 </script>
 
 <template>
