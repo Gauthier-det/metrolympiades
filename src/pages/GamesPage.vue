@@ -19,7 +19,7 @@ async function fetchMatchs() {
       },
     });
     if (!response.ok) {
-        throw new Error("Impossible de récupérer les matchs");
+      throw new Error("Impossible de récupérer les matchs");
     }
     const data = await response.json();
     matchs.value = data;
@@ -31,32 +31,36 @@ async function fetchMatchs() {
 }
 
 function formatDate(dateString) {
-  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-  return new Date(dateString).toLocaleDateString('fr-FR', options);
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  return new Date(dateString).toLocaleDateString("fr-FR", options);
 }
 
 onMounted(() => {
   fetchMatchs();
 });
-
 </script>
 
 <template>
   <div class="container">
-    <Sidebar :user="user"/>
+    <Sidebar :user="user" />
 
     <div class="main-content">
-        <div class="header">
-          <h1>Mes matchs</h1>
-          <button >
-            <router-link to="/game">Nouveau Match</router-link>
-          </button>
-        </div>
-        <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+      <div class="header">
+        <h1>Mes matchs</h1>
+        <button>
+          <router-link to="/game">Nouveau Match</router-link>
+        </button>
+      </div>
+      <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-        <div class="matches-container">
+      <div class="matches-container">
         <div v-for="match in matchs" :key="match.id" class="match-card">
-            
           <div class="match-header">
             <span class="match-type">{{ match.activity }}</span>
             <span class="match-time">{{ formatDate(match.startedAt) }}</span>
@@ -73,8 +77,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </template>

@@ -6,8 +6,8 @@ import "../assets/sidebar.css";
 const props = defineProps({
   user: {
     type: Object,
-    default: null
-  }
+    default: null,
+  },
 });
 
 const router = useRouter();
@@ -27,22 +27,22 @@ function logout() {
     <div v-if="user">
       <div class="team-name">Équipe : {{ user.team.name }}</div>
       <router-link to="/leaderboard">
-          <i class="fa-solid fa-ranking-star"></i> Classement général
+        <i class="fa-solid fa-ranking-star"></i> Classement général
       </router-link>
       <router-link to="/team">
-          <i class="fas fa-users"></i> Mon équipe
+        <i class="fas fa-users"></i> Mon équipe
       </router-link>
       <router-link to="/games">
-          <i class="fas fa-calendar-alt"></i> Mes matchs
+        <i class="fas fa-calendar-alt"></i> Mes matchs
       </router-link>
       <button @click="logout">
-          <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+        <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
       </button>
     </div>
 
     <div v-else>
       <router-link to="/login">
-          <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+        <i class="fa-solid fa-right-to-bracket"></i> Se connecter
       </router-link>
     </div>
   </div>

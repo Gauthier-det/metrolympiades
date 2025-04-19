@@ -4,8 +4,8 @@ import Sidebar from "../components/Sidebar.vue";
 
 import "../assets/leaderboard.css";
 
-const user = JSON.parse(localStorage.getItem("user")); 
-const teams = ref([]); 
+const user = JSON.parse(localStorage.getItem("user"));
+const teams = ref([]);
 const errorMessage = ref("");
 
 async function fetchRanking() {
@@ -26,7 +26,6 @@ async function fetchRanking() {
 onMounted(() => {
   fetchRanking();
 });
-
 </script>
 
 <template>
@@ -35,7 +34,7 @@ onMounted(() => {
     <div class="main-content">
       <h1>Classement Général</h1>
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-      
+
       <div class="table-container">
         <table>
           <thead>
