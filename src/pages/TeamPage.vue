@@ -23,17 +23,37 @@ async function fetchTeam() {
         Authorization: `Bearer ${user.token}`,
       },
     });
+
     if (!response.ok) {
-      throw new Error("Impossible de récupérer le classement");
+      throw new Error("Une erreur est survenue lors de la récupération de l'équipe");
     }
+
     const data = await response.json();
+
+    if (!data) {
+      errorMessage.value = "Aucune équipe trouvée pour cet utilisateur.";
+      teams.value = {};
+      teamName.value = "";
+      teammates.value = [];
+      return;
+    }
+
     teams.value = data;
-    teamName.value = teams.value.name;
+    teamName.value = data.name || "";
+    teammates.value = [];
+
+    if (!Array.isArray(data.members) || data.members.length === 0) {
+      errorMessage.value = "Votre équipe n'a actuellement aucun membre.";
+      return;
+    } else {
+      errorMessage.value = "";
+    }
+    
     console.log(teams.value);
     showTeammates();
     console.log(teams.value);
   } catch (error) {
-    errorMessage.value = "Erreur lors de la récupération du classement.";
+    errorMessage.value = "Une erreur est survenue lors de la récupération de l'équipe";
     console.error(error);
   }
 }
@@ -116,7 +136,12 @@ function removeTeammate(index) {
           errorMessage
         }}</label>
         <label class="label" for="teammember">Membres de l'équipe :</label>
+        
         <div id="teammates-list">
+          <input
+            type="text"
+            v-model="user.username"
+          />
           <div v-for="(teammate, index) in teammates" :key="index" class="teammate">
             <input
               type="text"
