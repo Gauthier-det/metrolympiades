@@ -3,8 +3,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Sidebar from "../components/Sidebar.vue";
 
-import "../assets/main.css";
-import "../assets/teamForm.css";
 
 const router = useRouter();
 
@@ -96,10 +94,17 @@ function removeTeammate(index) {
   <div class="container">
     <Sidebar :user="user" />
     <div class="main-content">
-      <h1>Mon équipe !</h1>
-      <form id="team-form">
+      <div class="header">
+        <h1>Mon équipe !</h1>
+        <button @click="updateTeam">Enregistrer</button>
+      </div>
+
+      
+      <div class ="center-container">
+
+      <form class="form-container">
         <label class="label" for="teamname">Nom de l'équipe :</label>
-        <br /><br />
+        
         <input
           type="text"
           id="teamname"
@@ -110,10 +115,9 @@ function removeTeammate(index) {
         <label v-if="errorMessage" class="error-message">{{
           errorMessage
         }}</label>
-        <br /><br />
         <label class="label" for="teammember">Membres de l'équipe :</label>
         <div id="teammates-list">
-          <div v-for="(teammate, index) in teammates" :key="index">
+          <div v-for="(teammate, index) in teammates" :key="index" class="teammate">
             <input
               type="text"
               v-model="teammates[index]"
@@ -124,7 +128,7 @@ function removeTeammate(index) {
               @click="removeTeammate(index)"
               class="remove-btn"
             >
-              Supprimer
+              X
             </button>
           </div>
         </div>
@@ -133,14 +137,11 @@ function removeTeammate(index) {
           value="Ajouter un coéquipier"
           @click="addTeammate"
         />
-        <br /><br />
-        <div class="header-actions">
-          <input type="button" value="Enregistrer" @click="updateTeam" />
-        </div>
         <label v-if="updateMessage" class="success-message">{{
           updateMessage
         }}</label>
       </form>
+    </div>
     </div>
   </div>
 </template>

@@ -1,14 +1,29 @@
 /* form.css */
+
 .form-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 1rem;
   width: 100%;
   max-width: 400px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin: 0 auto;
+  margin-top: 2rem;
 }
+
+.form-container .form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
 
 .form-container input,
 .form-container button {
@@ -19,24 +34,48 @@
   border-radius: 4px;
 }
 
-.form-container button:disabled {
-  background-color: #ddd;
+.teammate-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.form-container button.loading {
-  background-color: #0d6efd;
-  color: white;
+.form-container input {
+  width: 100%;
 }
 
-.form-container .error-message {
-  color: red;
-  font-size: 1rem;
+.form-container .remove-btn {
+  width: auto;
+  border: none;
+  background-color: transparent;
+  color: #f44336;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.form-container .teammate{
+  display: flex;
+  align-items: center;
+}
+
+
+.form-container p {
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
   margin-top: 1rem;
 }
 
-.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+.form-container p a,
+.form-container p router-link {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.form-container p a:hover,
+.form-container p router-link:hover {
+  color: #3730a3;
+  text-decoration: underline;
 }

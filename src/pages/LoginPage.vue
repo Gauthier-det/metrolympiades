@@ -58,9 +58,9 @@ async function login() {
 </script>
 
 <template>
-  <div class="page-container">
+  <div class="log-page-container">
     <form @submit.prevent="login" class="form-container">
-      <h1 style="margin-bottom: 1rem">Connexion</h1>
+      <h1 class="form-title">Connexion</h1>
       <input
         type="email"
         id="email"

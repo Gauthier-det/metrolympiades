@@ -69,9 +69,9 @@ async function register() {
 </script>
 
 <template>
-  <div class="page-container">
+  <div class="log-page-container">
     <form @submit.prevent="register" class="form-container">
-      <h1 style="margin-bottom: 1rem">Inscription</h1>
+      <h1 class="form-title">Inscription</h1>
       <input
         type="text"
         id="username"

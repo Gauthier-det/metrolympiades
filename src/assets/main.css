@@ -8,6 +8,18 @@ body {
   color: #333;
 }
 
+.log-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;;
+}
+
 .container {
   display: flex;
   height: 100vh;
@@ -26,6 +38,36 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.error {
+.error-message {
   color: red;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.header a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.2em;
+}
+
+.header h1 {
+  margin-bottom: 0;
+}
+
+.header button {
+  width: auto;
+  padding: 10px 20px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: center;
 }
