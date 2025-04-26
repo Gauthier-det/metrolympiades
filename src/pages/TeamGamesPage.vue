@@ -16,7 +16,6 @@ const errorMessage = ref("");
 
 const matchs = ref([]);
 
-
 async function fetchMatchs() {
   try {
     const response = await fetch(`http://localhost:3000/matches/${teamId.value}`, {
