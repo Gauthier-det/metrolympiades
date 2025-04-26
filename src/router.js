@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage.vue";
 import GamesPage from "./pages/GamesPage.vue";
 import GamePage from "./pages/GamePage.vue";
 import Team from "./pages/TeamPage.vue";
+import TeamGamesPage from "./pages/TeamGamesPage.vue"
 
 const routes = [
   {
@@ -46,6 +47,14 @@ const routes = [
     path: "/team",
     name: "team",
     component: Team,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/team/:id/matches",
+    name: "teamMatches",
+    component: TeamGamesPage,
     meta: {
       requiresAuth: true,
     },
