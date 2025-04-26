@@ -70,4 +70,13 @@ router.beforeEach((to, _, next) => {
   }
 });
 
+router.afterEach((to) => {
+  if (to.name) {
+    let pageName = to.name.substring(0, 1).toUpperCase() + to.name.substring(1);
+    document.title = `${pageName} - Metrolympiades`;
+  } else {
+    document.title = "Metrolympiades";
+  }
+});
+
 export default router;
