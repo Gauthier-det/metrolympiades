@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import Sidebar from "../components/Sidebar.vue";
 
 import "../assets/leaderboard.css";
@@ -10,6 +10,8 @@ const user = JSON.parse(localStorage.getItem("user"));
 const teams = ref([]);
 const teamsInfo = ref([]);
 const errorMessage = ref("");
+const isSidebarOpen = ref(false);
+const isDesktop = ref(window.innerWidth > 768);
 
 const router = useRouter();
 
@@ -52,15 +54,49 @@ function goToTeamMatches(team) {
   }
 }
 
+function handleResize() {
+  isDesktop.value = window.innerWidth > 768;
+  if (isDesktop.value) {
+    isSidebarOpen.value = false;
+  }
+}
+
 onMounted(() => {
   fetchRanking();
   fetchTeams();
+  window.addEventListener("resize", handleResize);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
+
+function toggleSidebar() {
+  console.log("Toggle sidebar");
+  isSidebarOpen.value = !isSidebarOpen.value;
+  isDesktop.value = window.innerWidth > 768;
+  console.log("window width:", window.innerWidth);
+  console.log("Sidebar state:", isSidebarOpen.value);
+  console.log("Is desktop:", isDesktop.value);
+}
+
 </script>
 
 <template>
   <div class="container">
-    <Sidebar :user="user" />
+    <button class="burger-btn" v-if="!isSidebarOpen && !isDesktop" @click="toggleSidebar">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <Sidebar
+      v-show="isSidebarOpen || isDesktop"
+      :user="user"
+    >
+    <button class="close-btn" @click="toggleSidebar">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    </Sidebar>
+
     <div class="main-content">
       <h1>Classement Général</h1>
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
