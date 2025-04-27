@@ -13,7 +13,6 @@ const errorMessage = ref("");
 
 const router = useRouter();
 
-
 async function fetchRanking() {
   try {
     const response = await fetch("http://localhost:3000/ranking");
@@ -35,7 +34,7 @@ async function fetchTeams() {
     }
     const data = await response.json();
     teamsInfo.value = data;
-    console.log(teamsInfo.value[0])
+    console.log(teamsInfo.value[0]);
   } catch (error) {
     errorMessage.value = "Erreur lors de la récupération des équipes.";
   }
@@ -46,7 +45,7 @@ function goToTeamMatches(team) {
   if (completeTeamInfo) {
     router.push({
       name: "teamMatches",
-      params: { id: completeTeamInfo.id }
+      params: { id: completeTeamInfo.id },
     });
   } else {
     errorMessage.value = "Informations de l'équipe non trouvées.";
@@ -82,7 +81,10 @@ onMounted(() => {
               <td>{{ team.team }}</td>
               <td>{{ team.points }} pts</td>
               <td>
-                <button class="view-matches-button" @click="goToTeamMatches(team)">
+                <button
+                  class="view-matches-button"
+                  @click="goToTeamMatches(team)"
+                >
                   Voir les matchs
                 </button>
               </td>

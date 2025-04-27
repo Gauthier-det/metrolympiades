@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage.vue";
 import GamesPage from "./pages/GamesPage.vue";
 import GamePage from "./pages/GamePage.vue";
 import Team from "./pages/TeamPage.vue";
-import TeamGamesPage from "./pages/TeamGamesPage.vue"
+import TeamGamesPage from "./pages/TeamGamesPage.vue";
 
 const routes = [
   {

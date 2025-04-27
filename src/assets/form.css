@@ -9,7 +9,7 @@
   background-color: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   margin-top: 2rem;
 }
@@ -23,7 +23,6 @@
   border-bottom: 2px solid #eee;
   padding-bottom: 0.5rem;
 }
-
 
 .form-container input,
 .form-container button {
@@ -53,12 +52,11 @@
   font-size: 1.2rem;
 }
 
-.form-container .teammate{
+.form-container .teammate {
   display: flex;
   align-items: center;
   margin-top: 0.75rem;
 }
-
 
 .form-container p {
   font-size: 0.95rem;

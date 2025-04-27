@@ -47,15 +47,13 @@ async function register() {
       if (response.status === 400) {
         errorMessage.value = "Cet utilisateur existe déjà.";
       } else {
-        errorMessage.value =
-          "Une erreur s'est produite. Veuillez réessayer.";
+        errorMessage.value = "Une erreur s'est produite. Veuillez réessayer.";
       }
       return;
     }
 
     localStorage.setItem("user", JSON.stringify(data));
     router.push("/leaderboard");
-
   } catch (error) {
     console.error("Erreur réseau ou API injoignable :", error);
     errorMessage.value = "Une erreur est survenue. Veuillez réessayer.";
@@ -63,9 +61,6 @@ async function register() {
     isLoading.value = false;
   }
 }
-
-
-
 </script>
 
 <template>

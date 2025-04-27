@@ -3,7 +3,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Sidebar from "../components/Sidebar.vue";
 
-
 const router = useRouter();
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -25,7 +24,9 @@ async function fetchTeam() {
     });
 
     if (!response.ok) {
-      throw new Error("Une erreur est survenue lors de la récupération de l'équipe");
+      throw new Error(
+        "Une erreur est survenue lors de la récupération de l'équipe",
+      );
     }
 
     const data = await response.json();
@@ -48,12 +49,13 @@ async function fetchTeam() {
     } else {
       errorMessage.value = "";
     }
-    
+
     console.log(teams.value);
     showTeammates();
     console.log(teams.value);
   } catch (error) {
-    errorMessage.value = "Une erreur est survenue lors de la récupération de l'équipe";
+    errorMessage.value =
+      "Une erreur est survenue lors de la récupération de l'équipe";
     console.error(error);
   }
 }
@@ -119,54 +121,53 @@ function removeTeammate(index) {
         <button @click="updateTeam">Enregistrer</button>
       </div>
 
-      
-      <div class ="center-container">
+      <div class="center-container">
+        <form class="form-container">
+          <label class="label" for="teamname">Nom de l'équipe :</label>
 
-      <form class="form-container">
-        <label class="label" for="teamname">Nom de l'équipe :</label>
-        
-        <input
-          type="text"
-          id="teamname"
-          name="teamname"
-          placeholder="Nom d'équipe"
-          v-model="teamName"
-        />
-        <label v-if="errorMessage" class="error-message">{{
-          errorMessage
-        }}</label>
-        <label class="label" for="teammember">Membres de l'équipe :</label>
-        
-        <div id="teammates-list">
           <input
             type="text"
-            v-model="user.username"
+            id="teamname"
+            name="teamname"
+            placeholder="Nom d'équipe"
+            v-model="teamName"
           />
-          <div v-for="(teammate, index) in teammates" :key="index" class="teammate">
-            <input
-              type="text"
-              v-model="teammates[index]"
-              placeholder="Nom du coéquipier"
-            />
-            <button
-              type="button"
-              @click="removeTeammate(index)"
-              class="remove-btn"
+          <label v-if="errorMessage" class="error-message">{{
+            errorMessage
+          }}</label>
+          <label class="label" for="teammember">Membres de l'équipe :</label>
+
+          <div id="teammates-list">
+            <input type="text" v-model="user.username" />
+            <div
+              v-for="(teammate, index) in teammates"
+              :key="index"
+              class="teammate"
             >
-              X
-            </button>
+              <input
+                type="text"
+                v-model="teammates[index]"
+                placeholder="Nom du coéquipier"
+              />
+              <button
+                type="button"
+                @click="removeTeammate(index)"
+                class="remove-btn"
+              >
+                X
+              </button>
+            </div>
           </div>
-        </div>
-        <input
-          type="button"
-          value="Ajouter un coéquipier"
-          @click="addTeammate"
-        />
-        <label v-if="updateMessage" class="success-message">{{
-          updateMessage
-        }}</label>
-      </form>
-    </div>
+          <input
+            type="button"
+            value="Ajouter un coéquipier"
+            @click="addTeammate"
+          />
+          <label v-if="updateMessage" class="success-message">{{
+            updateMessage
+          }}</label>
+        </form>
+      </div>
     </div>
   </div>
 </template>

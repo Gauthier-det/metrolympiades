@@ -18,13 +18,17 @@ const matchs = ref([]);
 
 async function fetchMatchs() {
   try {
-    const response = await fetch(`http://localhost:3000/matches/${teamId.value}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
+    console.log(teamId.value);
+    const response = await fetch(
+      `http://localhost:3000/matches?teamId=${teamId.value}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       },
-    });
+    );
     if (!response.ok) {
       throw new Error("Impossible de récupérer les matchs");
     }
@@ -32,19 +36,21 @@ async function fetchMatchs() {
     matchs.value = data;
   } catch (error) {
     errorMessage.value = "Erreur lors de la récupération des matchs ";
-
   }
 }
 
 async function fetchTeamInfo() {
   try {
-    const response = await fetch(`http://localhost:3000/teams/${teamId.value}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
+    const response = await fetch(
+      `http://localhost:3000/teams/${teamId.value}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       },
-    });
+    );
     if (!response.ok) {
       throw new Error("Impossible de récupérer l'équipe");
     }
@@ -55,7 +61,6 @@ async function fetchTeamInfo() {
     errorMessage.value = "Erreur lors de la récupération de l'équipe";
   }
 }
-
 
 function formatDate(dateString) {
   const options = {
@@ -79,8 +84,12 @@ onMounted(() => {
     <Sidebar :user="user" />
 
     <div class="main-content">
-      <div class="header">
-        <h1>Matchs de ${{team}}</h1>
+      <div v-if="team" class="header">
+        <h1>Matchs de {{ team.name }}</h1>
+      </div>
+
+      <div v-else class="header">
+        <h1>Chargement de l’équipe…</h1>
       </div>
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 

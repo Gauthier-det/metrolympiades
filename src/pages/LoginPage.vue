@@ -45,7 +45,6 @@ async function login() {
 
     localStorage.setItem("user", JSON.stringify(data));
     router.push("/leaderboard");
-
   } catch (error) {
     console.error("Erreur réseau ou serveur injoignable :", error);
     errorMessage.value = "Une erreur est survenue. Veuillez réessayer.";
@@ -53,8 +52,6 @@ async function login() {
     isLoading.value = false;
   }
 }
-
-
 </script>
 
 <template>
